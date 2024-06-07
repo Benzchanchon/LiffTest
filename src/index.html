@@ -17,7 +17,7 @@
     <script>
         const main = async() => {  //สร้างฟังชั่น main
             try {
-                await liff.init({ liffId: "2005552640-GVlONKZb" });  // await=รอ รอการตั้งค่า LIFF ด้วย LIFF ID ที่กำหนดไว้
+                await liff.init({ liffId: "2005552640-X4EbjzBR" });  // await=รอ รอการตั้งค่า LIFF ด้วย LIFF ID ที่กำหนดไว้
                 console.log('LIFF initialized');
                 
                 if (!liff.isLoggedIn()) { // หากผู้ใช้ยังไม่ได้ล็อกอิน ให้ทำการล็อกอิน
@@ -29,14 +29,6 @@
                     document.getElementById("profilePicture").src = profile.pictureUrl;  //อัพเดทรูปโปรไฟล์
                     document.getElementById("displayName").textContent = `Hello, ${profile.displayName}`; //    อัพเดทชื่อผู้ใช้
                     document.getElementById("userId").textContent = `UID: ${profile.userId}`; //อัพเดท UID
-                    
-                    // ดึงข้อมูลเพิ่มเติมจากเซิร์ฟเวอร์
-                    fetch(`/get_user_profile?user_id=${profile.userId}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Server response:', data);
-                        })
-                        .catch(error => console.error('Error fetching user profile:', error));
                 }
             } catch (error) {
                 console.error('LIFF Initialization failed', error);  // ถ้ามีข้อผิดพลาดในการตั้งค่า LIFF ให้แสดงข้อผิดพลาดใน console
