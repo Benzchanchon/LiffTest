@@ -17,10 +17,14 @@
     <script>
         const main = async() => {  //สร้างฟังชั่น main
             try {
-                await liff.init({ liffId: "2005552640-GVlONKZb" });  // await=รอ รอการตั้งค่า LIFF ด้วย LIFF ID ที่กำหนดไว้
+                await liff.init({ liffId: "2005552640-X4EbjzBR" });  // await=รอ รอการตั้งค่า LIFF ด้วย LIFF ID ที่กำหนดไว้
+                console.log('LIFF initialized');
+                
                 if (!liff.isLoggedIn()) { // หากผู้ใช้ยังไม่ได้ล็อกอิน ให้ทำการล็อกอิน
+                    console.log('User not logged in, logging in...');
                     liff.login();
                 } else {  //ถ้าผู้ใช้ได้ล็อกอินแล้วจะดึงข้อมูลโปรไฟล์มาใช้
+                    console.log('User logged in');
                     const profile = await liff.getProfile();
                     document.getElementById("profilePicture").src = profile.pictureUrl;  //อัพเดทรูปโปรไฟล์
                     document.getElementById("displayName").textContent = `Hello, ${profile.displayName}`; //    อัพเดทชื่อผู้ใช้
