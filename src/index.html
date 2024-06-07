@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id="lineprofile">
+            <img id="profilePicture" width="100px" src="" >
+            <div id="displayName">hello name</div>
+            <div id="userId">UID: Your UID</div>
+        </div>
+    </div>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+    <script>
+        const main = async() => {  //สร้างฟังชั่น main
+            try {
+                await liff.init({ liffId: "2005552640-GVlONKZb" });  // await=รอ รอการตั้งค่า LIFF ด้วย LIFF ID ที่กำหนดไว้
+                if (!liff.isLoggedIn()) { // หากผู้ใช้ยังไม่ได้ล็อกอิน ให้ทำการล็อกอิน
+                    liff.login();
+                } else {  //ถ้าผู้ใช้ได้ล็อกอินแล้วจะดึงข้อมูลโปรไฟล์มาใช้
+                    const profile = await liff.getProfile();
+                    document.getElementById("profilePicture").src = profile.pictureUrl;  //อัพเดทรูปโปรไฟล์
+                    document.getElementById("displayName").textContent = `Hello, ${profile.displayName}`; //    อัพเดทชื่อผู้ใช้
+                    document.getElementById("userId").textContent = `UID: ${profile.userId}`; //อัพเดท UID
+                }
+            } catch (error) {
+                console.error('LIFF Initialization failed', error);  // ถ้ามีข้อผิดพลาดในการตั้งค่า LIFF ให้แสดงข้อผิดพลาดใน console
+            }
+        }
+        main(); //เรียกใช้ฟังชั่น main
+    </script>
+</body>
+</html>

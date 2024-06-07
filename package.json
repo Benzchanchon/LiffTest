@@ -1,0 +1,13 @@
+{
+    "name": "liff-exp",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "nodemon server.js",
+      "client": "python3 -m http.server --directory src 8000",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+  }
