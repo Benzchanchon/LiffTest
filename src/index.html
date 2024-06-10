@@ -4,50 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #lineprofile {
+            display: none;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #profilePicture {
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        #logoutButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #logoutButton:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <div id="lineprofile" style="display:none;">
-            <img id="profilePicture" width="100px" src="" >
-            <div id="displayName">hello name</div>
-            <div id="userId">UID: Your UID</div>
-            <button id="logoutButton" style="display:none;">Logout</button> <!-- ปุ่ม Logout -->
-        </div>
+    <div id="lineprofile">
+        <img id="profilePicture" width="100px" src="">
+        <div id="displayName">Hello, name</div>
+        <div id="userId">UID: Your UID</div>
+        <button id="logoutButton">Logout</button>
     </div>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
     <script>
-        const main = async () => {  //สร้างฟังชั่น main
+        const main = async () => {  
             try {
-                await liff.init({ liffId: "2005552640-X4EbjzBR" });  // await=รอ รอการตั้งค่า LIFF ด้วย LIFF ID ที่กำหนดไว้
+                await liff.init({ liffId: "2005552640-X4EbjzBR" });  
                 console.log('LIFF initialized');
                 
-                if (!liff.isLoggedIn()) { // หากผู้ใช้ยังไม่ได้ล็อกอิน ให้ทำการล็อกอิน
+                if (!liff.isLoggedIn()) { 
                     console.log('User not logged in, logging in...');
                     liff.login();
-                } else {  //ถ้าผู้ใช้ได้ล็อกอินแล้วจะดึงข้อมูลโปรไฟล์มาใช้
+                } else {  
                     console.log('User logged in');
                     const profile = await liff.getProfile();
                     console.log('Profile:', profile);
-                    document.getElementById("profilePicture").src = profile.pictureUrl;  //อัพเดทรูปโปรไฟล์
-                    document.getElementById("displayName").textContent = `Hello, ${profile.displayName}`; //    อัพเดทชื่อผู้ใช้
-                    document.getElementById("userId").textContent = `UID: ${profile.userId}`; //อัพเดท UID
-                    document.getElementById("lineprofile").style.display = 'block';  // แสดงข้อมูลโปรไฟล์
-                    document.getElementById("logoutButton").style.display = 'block';  // แสดงปุ่ม Logout
+                    document.getElementById("profilePicture").src = profile.pictureUrl;  
+                    document.getElementById("displayName").textContent = `Hello, ${profile.displayName}`; 
+                    document.getElementById("userId").textContent = `UID: ${profile.userId}`; 
+                    document.getElementById("lineprofile").style.display = 'block';  
+                    document.getElementById("logoutButton").style.display = 'block';  
                 }
             } catch (error) {
-                console.error('LIFF Initialization failed', error);  // ถ้ามีข้อผิดพลาดในการตั้งค่า LIFF ให้แสดงข้อผิดพลาดใน console
+                console.error('LIFF Initialization failed', error);  
             }
         }
 
-        const logout = () => {  // ฟังก์ชัน Logout
+        const logout = () => {  
             console.log('Logging out...');
             liff.logout();
-            window.location.reload();  // Reload หน้าเว็บหลังจาก Logout
+            window.location.reload();  
         }
 
-        document.getElementById("logoutButton").addEventListener("click", logout);  // เพิ่ม Event Listener สำหรับปุ่ม Logout
+        document.getElementById("logoutButton").addEventListener("click", logout);  
 
-        main(); //เรียกใช้ฟังชั่น main
+        main(); 
     </script>
 </body>
 </html>
