@@ -26,7 +26,7 @@
             border-radius: 50%;
             margin-bottom: 20px;
         }
-        #logoutButton {
+        .button {
             margin-top: 20px;
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -35,7 +35,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #logoutButton:hover {
+        .button:hover {
             background-color: #45a049;
         }
     </style>
@@ -45,7 +45,8 @@
         <img id="profilePicture" width="100px" src="">
         <div id="displayName">Hello, name</div>
         <div id="userId">UID: Your UID</div>
-        <button id="logoutButton">Logout</button>
+        <button id="logoutButton" class="button">Logout</button>
+        <button id="urlButton" class="button">ไปที่ร้านค้า</button>
     </div>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
     <script>
@@ -65,7 +66,6 @@
                     document.getElementById("displayName").textContent = `${profile.displayName}`; 
                     document.getElementById("userId").textContent = `UID: ${profile.userId}`; 
                     document.getElementById("lineprofile").style.display = 'block';  
-                    document.getElementById("logoutButton").style.display = 'block';  
                 }
             } catch (error) {
                 console.error('LIFF Initialization failed', error);  
@@ -78,7 +78,13 @@
             window.location.reload();  
         }
 
+        const goToUrl = () => {
+            const url = "https://shop.line.me/@thainiyom/product/1006310597"; // เปลี่ยน URL ที่ต้องการได้ที่นี่
+            window.location.href = url;
+        }
+
         document.getElementById("logoutButton").addEventListener("click", logout);  
+        document.getElementById("urlButton").addEventListener("click", goToUrl);
 
         main(); 
     </script>
