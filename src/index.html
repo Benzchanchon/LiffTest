@@ -38,15 +38,22 @@
         .button:hover {
             background-color: #45a049;
         }
+        #welcome {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div id="lineprofile">
+        <div id="welcome">ยินดีต้อนรับ</div>
         <img id="profilePicture" width="100px" src="">
         <div id="displayName">Hello, name</div>
         <div id="userId">UID: Your UID</div>
         <button id="logoutButton" class="button">Logout</button>
-        <button id="urlButton" class="button">ไปที่ร้านค้า</button>
+        <button id="urlButton" class="button">กดปุ่มเพื่อทำการสั่งซื้อ</button>
     </div>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
     <script>
@@ -79,7 +86,7 @@
         }
 
         const goToUrl = () => {
-            const url = "https://shop.line.me/@thainiyom/product/1006310597"; // เปลี่ยน URL ที่ต้องการได้ที่นี่
+            const url = "https://shop.line.me/@thainiyom/product/1005955953"; //เปลี่ยน URL ที่ต้องการได้ที่นี่
             window.location.href = url;
         }
 
