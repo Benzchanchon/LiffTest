@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #lineprofile {
+            display: none;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #profilePicture {
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        #welcome {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="lineprofile">
+        <div id="welcome">ยินดีต้อนรับ</div>
+        <img id="profilePicture" width="100px" src="">
+        <div id="displayName">Hello, name</div>
+        <div id="userId">UID: Your UID</div>
+        <button id="logoutButton" class="button">Logout</button>
+        <button id="urlButton" class="button">กดปุ่มเพื่อทำการสั่งซื้อ</button>
+    </div>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/versions/2.22.3/sdk.js"></script>
+    <script>
+        const main = async () => {  
+            try {
+                await liff.init({ liffId: "2005552640-K59ODJy6" });  
+                console.log('LIFF initialized');
+                
+                if (!liff.isLoggedIn()) { 
+                    console.log('User not logged in, logging in...');
+                    liff.login();
+                } else {  
+                    console.log('User logged in');
+                    const profile = await liff.getProfile();
+                    console.log('Profile:', profile);
+                    document.getElementById("profilePicture").src = profile.pictureUrl;  
+                    document.getElementById("displayName").textContent = `${profile.displayName}`; 
+                    document.getElementById("userId").textContent = `UID: ${profile.userId}`; 
+                    document.getElementById("lineprofile").style.display = 'block';  
+                }
+            } catch (error) {
+                console.error('LIFF Initialization failed', error);  
+            }
+        }
+
+        const logout = () => {  
+            console.log('Logging out...');
+            liff.logout();
+            window.location.reload();  
+        }
+
+        const goToUrl = () => {
+            const url = "https://shop.line.me/@thainiyom/product/1006213348"; //เปลี่ยน URL ที่ต้องการได้ที่นี่
+            window.location.href = url;
+        }
+
+        document.getElementById("logoutButton").addEventListener("click", logout);  
+        document.getElementById("urlButton").addEventListener("click", goToUrl);
+
+        main(); 
+    </script>
+</body>
+</html>
